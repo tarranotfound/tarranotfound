@@ -1,12 +1,6 @@
 <div align="center">
 
-# AKHTAR ARDHANI
-
-**UI Designer · Linux Enthusiast · Open Source**
-
-Linux, interfaces, and things worth customizing.
-
-[![GitHub](https://img.shields.io/badge/GitHub-tarranotfound-111111?style=flat-square&logo=github)](https://github.com/tarranotfound)
+<img src="header.svg" width="100%">
 
 </div>
 
@@ -61,7 +55,7 @@ Learning and credential-related work.
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=tarranotfound&bg_color=00000000&color=9cbd82&line=99c0bf&point=ffffff&area=true&hide_border=true" width="100%">
+<img src="https://raw.githubusercontent.com/tarranotfound/tarranotfound/output/github-contribution-grid-snake-dark.svg" width="100%">
 
 </div>
 
