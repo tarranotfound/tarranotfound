@@ -18,9 +18,14 @@ double calculate(double a, char op, double b) {
     }
 }
 
+double square_root(double value) {
+    if (value < 0) throw std::runtime_error("square root of a negative number");
+    return std::sqrt(value);
+}
+
 void print_help() {
     std::cout << "Commands: help, quit\n"
-              << "Expressions: 8 + 3, 12 / 4, 2 ^ 8\n";
+              << "Expressions: 8 + 3, 12 / 4, 2 ^ 8, sqrt 81\n";
 }
 
 int main() {
@@ -36,14 +41,24 @@ int main() {
         if (line.empty()) continue;
 
         std::istringstream input(line);
-        double a{}, b{};
-        char op{};
-        if (!(input >> a >> op >> b)) {
-            std::cout << "Invalid expression. Type help for examples.\n";
-            continue;
-        }
+        std::string first;
+        input >> first;
 
         try {
+            if (first == "sqrt") {
+                double value{};
+                if (!(input >> value)) throw std::runtime_error("usage: sqrt 81");
+                std::cout << "= " << square_root(value) << '\n';
+                continue;
+            }
+
+            std::istringstream expression(line);
+            double a{}, b{};
+            char op{};
+            if (!(expression >> a >> op >> b)) {
+                std::cout << "Invalid expression. Type help for examples.\n";
+                continue;
+            }
             std::cout << "= " << calculate(a, op, b) << '\n';
         } catch (const std::exception& error) {
             std::cout << "Error: " << error.what() << '\n';
