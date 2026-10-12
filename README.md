@@ -12,7 +12,6 @@ i love experimenting
 ![](https://streak-stats.demolab.com/?user=tarranotfound&theme=dark&hide_border=false)<br/>
 ![](https://github-readme-stats.shion.dev/api/top-langs/?username=tarranotfound&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
-![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark)
 
 ---
-[![](https://komarev.com/ghpvc/?username=tarranotfound&icon=1&color=0)](https://visitcount.itsvg.in)
+[![](https://komarev.com/ghpvc/?username=tarranotfound&icon=1&color=red)](https://visitcount.itsvg.in)
