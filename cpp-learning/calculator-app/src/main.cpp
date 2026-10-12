@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -21,6 +22,7 @@ void print_help() {
 }
 
 int main() {
+    std::cout << std::fixed << std::setprecision(4);
     std::cout << "C++ Terminal Calculator\nType help for usage.\n";
     std::string line;
 
