@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 
 double calculate(double a, char op, double b) {
@@ -16,24 +17,30 @@ double calculate(double a, char op, double b) {
 
 int main() {
     std::cout << "C++ Terminal Calculator\n";
-    std::cout << "Enter an expression, for example: 8 + 3\n";
+    std::cout << "Enter expressions like 8 + 3. Type quit to exit.\n";
 
     std::string line;
-    std::getline(std::cin, line);
-    std::istringstream input(line);
+    while (true) {
+        std::cout << "> ";
+        if (!std::getline(std::cin, line)) break;
+        if (line == "quit" || line == "exit") break;
+        if (line.empty()) continue;
 
-    double a{}, b{};
-    char op{};
-    if (!(input >> a >> op >> b)) {
-        std::cerr << "Invalid expression. Try: 8 + 3\n";
-        return 1;
+        std::istringstream input(line);
+        double a{}, b{};
+        char op{};
+        if (!(input >> a >> op >> b)) {
+            std::cout << "Invalid expression. Example: 8 + 3\n";
+            continue;
+        }
+
+        try {
+            std::cout << "= " << calculate(a, op, b) << '\n';
+        } catch (const std::exception& error) {
+            std::cout << "Error: " << error.what() << '\n';
+        }
     }
 
-    try {
-        std::cout << "Result: " << calculate(a, op, b) << '\n';
-    } catch (const std::exception& error) {
-        std::cerr << "Error: " << error.what() << '\n';
-        return 1;
-    }
+    std::cout << "Goodbye!\n";
     return 0;
 }
