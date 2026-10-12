@@ -15,22 +15,27 @@ double calculate(double a, char op, double b) {
     }
 }
 
-int main() {
-    std::cout << "C++ Terminal Calculator\n";
-    std::cout << "Enter expressions like 8 + 3. Type quit to exit.\n";
+void print_help() {
+    std::cout << "Commands: help, quit\n"
+              << "Expressions: 8 + 3, 12 / 4, 5 * 7\n";
+}
 
+int main() {
+    std::cout << "C++ Terminal Calculator\nType help for usage.\n";
     std::string line;
+
     while (true) {
         std::cout << "> ";
         if (!std::getline(std::cin, line)) break;
         if (line == "quit" || line == "exit") break;
+        if (line == "help") { print_help(); continue; }
         if (line.empty()) continue;
 
         std::istringstream input(line);
         double a{}, b{};
         char op{};
         if (!(input >> a >> op >> b)) {
-            std::cout << "Invalid expression. Example: 8 + 3\n";
+            std::cout << "Invalid expression. Type help for examples.\n";
             continue;
         }
 
@@ -40,7 +45,6 @@ int main() {
             std::cout << "Error: " << error.what() << '\n';
         }
     }
-
     std::cout << "Goodbye!\n";
     return 0;
 }
