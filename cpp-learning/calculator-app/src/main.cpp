@@ -22,8 +22,15 @@ int main() {
         case '+': result = a + b; break;
         case '-': result = a - b; break;
         case '*': result = a * b; break;
+        case '/':
+            if (b == 0) {
+                std::cerr << "Error: division by zero is not allowed.\n";
+                return 1;
+            }
+            result = a / b;
+            break;
         default:
-            std::cerr << "Supported operators: + - *\n";
+            std::cerr << "Supported operators: + - * /\n";
             return 1;
     }
 
