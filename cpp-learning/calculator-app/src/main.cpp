@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -12,13 +13,14 @@ double calculate(double a, char op, double b) {
         case '/':
             if (b == 0) throw std::runtime_error("division by zero");
             return a / b;
+        case '^': return std::pow(a, b);
         default: throw std::runtime_error("unsupported operator");
     }
 }
 
 void print_help() {
     std::cout << "Commands: help, quit\n"
-              << "Expressions: 8 + 3, 12 / 4, 5 * 7\n";
+              << "Expressions: 8 + 3, 12 / 4, 2 ^ 8\n";
 }
 
 int main() {
