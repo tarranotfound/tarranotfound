@@ -25,7 +25,7 @@ double square_root(double value) {
 }
 
 void print_help() {
-    std::cout << "Commands: help, history, quit\n"
+    std::cout << "Commands: help, history, clear, quit\n"
               << "Expressions: 8 + 3, 12 / 4, 2 ^ 8, sqrt 81\n";
 }
 
@@ -40,6 +40,11 @@ int main() {
         if (!std::getline(std::cin, line)) break;
         if (line == "quit" || line == "exit") break;
         if (line == "help") { print_help(); continue; }
+        if (line == "clear") {
+            history.clear();
+            std::cout << "History cleared.\n";
+            continue;
+        }
         if (line == "history") {
             if (history.empty()) std::cout << "History is empty.\n";
             for (const auto& entry : history) std::cout << entry << '\n';
@@ -55,13 +60,16 @@ int main() {
             double result{};
             if (first == "sqrt") {
                 double value{};
-                if (!(input >> value)) throw std::runtime_error("usage: sqrt 81");
+                std::string extra;
+                if (!(input >> value) || (input >> extra))
+                    throw std::runtime_error("usage: sqrt 81");
                 result = square_root(value);
             } else {
                 std::istringstream expression(line);
                 double a{}, b{};
                 char op{};
-                if (!(expression >> a >> op >> b))
+                std::string extra;
+                if (!(expression >> a >> op >> b) || (expression >> extra))
                     throw std::runtime_error("invalid expression; type help");
                 result = calculate(a, op, b);
             }
