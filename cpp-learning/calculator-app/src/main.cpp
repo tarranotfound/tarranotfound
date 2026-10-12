@@ -4,6 +4,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 double calculate(double a, char op, double b) {
     switch (op) {
@@ -24,13 +25,14 @@ double square_root(double value) {
 }
 
 void print_help() {
-    std::cout << "Commands: help, quit\n"
+    std::cout << "Commands: help, history, quit\n"
               << "Expressions: 8 + 3, 12 / 4, 2 ^ 8, sqrt 81\n";
 }
 
 int main() {
     std::cout << std::fixed << std::setprecision(4);
     std::cout << "C++ Terminal Calculator\nType help for usage.\n";
+    std::vector<std::string> history;
     std::string line;
 
     while (true) {
@@ -38,6 +40,11 @@ int main() {
         if (!std::getline(std::cin, line)) break;
         if (line == "quit" || line == "exit") break;
         if (line == "help") { print_help(); continue; }
+        if (line == "history") {
+            if (history.empty()) std::cout << "History is empty.\n";
+            for (const auto& entry : history) std::cout << entry << '\n';
+            continue;
+        }
         if (line.empty()) continue;
 
         std::istringstream input(line);
@@ -45,21 +52,24 @@ int main() {
         input >> first;
 
         try {
+            double result{};
             if (first == "sqrt") {
                 double value{};
                 if (!(input >> value)) throw std::runtime_error("usage: sqrt 81");
-                std::cout << "= " << square_root(value) << '\n';
-                continue;
+                result = square_root(value);
+            } else {
+                std::istringstream expression(line);
+                double a{}, b{};
+                char op{};
+                if (!(expression >> a >> op >> b))
+                    throw std::runtime_error("invalid expression; type help");
+                result = calculate(a, op, b);
             }
 
-            std::istringstream expression(line);
-            double a{}, b{};
-            char op{};
-            if (!(expression >> a >> op >> b)) {
-                std::cout << "Invalid expression. Type help for examples.\n";
-                continue;
-            }
-            std::cout << "= " << calculate(a, op, b) << '\n';
+            std::ostringstream formatted;
+            formatted << line << " = " << result;
+            history.push_back(formatted.str());
+            std::cout << "= " << result << '\n';
         } catch (const std::exception& error) {
             std::cout << "Error: " << error.what() << '\n';
         }
