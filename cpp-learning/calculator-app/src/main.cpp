@@ -12,10 +12,21 @@ int main() {
 
     double a{}, b{};
     char op{};
-    if (input >> a >> op >> b) {
-        std::cout << "You entered: " << a << ' ' << op << ' ' << b << '\n';
-    } else {
-        std::cout << "Could not read that expression.\n";
+    if (!(input >> a >> op >> b)) {
+        std::cerr << "Invalid expression. Try: 8 + 3\n";
+        return 1;
     }
+
+    double result{};
+    switch (op) {
+        case '+': result = a + b; break;
+        case '-': result = a - b; break;
+        case '*': result = a * b; break;
+        default:
+            std::cerr << "Supported operators: + - *\n";
+            return 1;
+    }
+
+    std::cout << "Result: " << result << '\n';
     return 0;
 }
