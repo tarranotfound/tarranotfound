@@ -1,0 +1,26 @@
+name: calculator-ci
+
+on:
+  push:
+    paths:
+      - 'cpp-learning/calculator-app/**'
+      - '.github/workflows/calculator-ci.yml'
+  pull_request:
+    paths:
+      - 'cpp-learning/calculator-app/**'
+      - '.github/workflows/calculator-ci.yml'
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cpp-learning/calculator-app
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler and make
+        run: sudo apt-get update && sudo apt-get install -y g++ make
+      - name: Build
+        run: make
+      - name: Run smoke tests
+        run: make test
