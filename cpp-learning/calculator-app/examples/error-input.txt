@@ -1,0 +1,6 @@
+# Manual input examples; errors should be reported without crashing
+8 / 0
+sqrt -9
+hello
+2 + 3 extra
+quit
