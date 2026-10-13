@@ -1,0 +1,7 @@
+# Feed these lines to the current calculator
+8 + 3
+12 / 4
+2 ^ 8
+sqrt 81
+history
+quit
