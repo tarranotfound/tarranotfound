@@ -1,0 +1,8 @@
+[package]
+name = "rust-cli-toolkit"
+version = "0.1.0"
+edition = "2024"
+description = "A small terminal toolkit for practicing Rust fundamentals"
+license = "MIT"
+
+[dependencies]
